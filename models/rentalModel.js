@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
+Joi.objectid = require('joi-objectid')(Joi)
 const { customerSchema } = require('./customerModel');
 const { movieSchema } = require('./movieModel');
 
@@ -55,8 +56,8 @@ const Rental = mongoose.model('Rentals', rentalSchema)
 
 const validateRental = (rental) => {
     const schema = Joi.object({
-        customerID: Joi.string().required(),
-        movieID: Joi.string().required()
+        customerID: Joi.objectid().required(),
+        movieID: Joi.objectid().required()
     })
 
     return schema.validate(rental)
